@@ -21,7 +21,6 @@ function getHtmlListOfCanapes(listOfCanapes){
       <img src="${canape.imageUrl}" alt="${canape.altTxt}">
       <h3 class="productName">${canape.name}</h3>
       <p class="productDescription">${canape.description}</p>
-      <p class="price">${canape.price}</p>
     </article>
   </a>`
   }
