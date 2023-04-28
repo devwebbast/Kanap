@@ -2,13 +2,10 @@
 let productToLocalStorage = JSON.parse(localStorage.getItem("productCart")) // converti les donnés au format JSON dans le localstorage en oject JS
 console.log(productToLocalStorage)
 
-async function main(){
-      let cartHtmlList = []
-       for (let k = 0; k < productToLocalStorage.length; k++){
-        cartHtmlList = cartHtmlList + `<article class="cart__item" data-id="{product-ID}" data-color="{product-color}">
-            <div class="cart__item__img">
-              <img src="${productToLocalStorage.imageURL}" alt="Photographie d'un canapé">
-            </div>
+// Affichage du contenu du panier
+  let cartList = ''
+  for (let k = 0; k < productToLocalStorage.length; k++){
+  cartList = cartList + `<article class="cart__item" data-id="{product-ID}" data-color="{product-color}">
             <div class="cart__item__content">
               <div class="cart__item__content__description">
                 <h2>${productToLocalStorage.name}</h2>
@@ -26,11 +23,10 @@ async function main(){
               </div>
             </div>
           </article>`
-          document.querySelector("#cart__items").innerHTML = cartHtmlList
-       }
+  document.querySelector("#cart__items").innerHTML = cartList
+  }
 
-}
-main()
+
 
 
 

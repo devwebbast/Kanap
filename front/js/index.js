@@ -1,31 +1,19 @@
-
-async function getCanapes(){
-  const response = await fetch ('http://localhost:3000/api/products')
-  const canapes = await response.json()
-  return canapes
-}
-
-async function main (){
-  const canapes = await getCanapes()
-  console.log(canapes)
-  const html = getHtmlListOfCanapes(canapes)
-  document.querySelector('#items').innerHTML = html
-}
-
-function getHtmlListOfCanapes(listOfCanapes){
-  let htmlList = ''
-  for (let i = 0; i < listOfCanapes.length; i++){
-    const canape = listOfCanapes[i]
-    htmlList = htmlList + `<a href="./product.html?id=${canape._id}">
-    <article>
-      <img src="${canape.imageUrl}" alt="${canape.altTxt}">
-      <h3 class="productName">${canape.name}</h3>
-      <p class="productDescription">${canape.description}</p>
-    </article>
-  </a>`
-  }
-return htmlList
-}
-main()
-
+const UrlApi = 'http://localhost:3000/api/products'
+fetch(UrlApi)
+  .then(response => response.json())
+  .then(canape => {
+    for (let i = 0; i < canape.length; i++){
+      document.querySelector('#items').innerHTML += `<a href="./product.html?id=${canape[i]._id}">
+      <article>
+        <img src="${canape[i].imageUrl}" alt="${canape[i].altTxt}">
+        <h3 class="productName">${canape[i].name}</h3>
+        <p class="productDescription">${canape[i].description}</p>
+      </article>
+    </a>`
+    }
+  })
+  .catch((e) => {
+    console.log('Erreur de connexion avec le serveur : ', e)
+    window.alert('Connexion serveur impossible')
+  })
 
