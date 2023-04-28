@@ -1,6 +1,6 @@
 // produit enregistré dns le localstorage
 let productToLocalStorage = JSON.parse(localStorage.getItem("productCart")) // converti les donnés au format JSON dans le localstorage en oject JS
-console.log(productToLocalStorage)
+
 
 // Affichage du contenu du panier
   let cartList = ''

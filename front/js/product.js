@@ -38,10 +38,8 @@ fetch(UrlApi)
     document.querySelector('#addToCart').addEventListener('click', function (){
       let quantityChoice = document.querySelector("#quantity").value
       let colorChoice = document.querySelector("#colors").value
-      let name = document.querySelector("#title").value
       let productCart = {
         id: id,
-        name: name,
         quantity: quantityChoice,
         color: colorChoice
       }
