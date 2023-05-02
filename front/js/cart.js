@@ -56,11 +56,76 @@ async function main(){
             location.reload()
           })
         }
-            
 
 
-}
+        //Bouton validation du formulaire
+
+        const orderButton = document.querySelector('#order')
+        orderButton.addEventListener('click', (event) => {
+          event.preventDefault();
+          validateForm();
+        })
+
+      }
 main()
+      // Validation des données du formulaire + regex
+function validateForm() {
+      
+        // Variables Regex
+      let nameRegex = /^[a-zA-Z\-çñàéèêëïîôüù ]{2,}$/
+      let adressRegex = /^[0-9a-zA-Z\s,.'-çñàéèêëïîôüù]{3,}$/
+      let emailRegex = /^[A-Za-z0-9\-\.]+@([A-Za-z0-9\-]+\.)+[A-Za-z0-9-]{2,4}$/
+      
+      const firstName = document.querySelector('#firstName').value
+      const lastName = document.querySelector('#lastName').value
+      const address = document.querySelector('#address').value
+      const city = document.querySelector('#city').value
+      const email = document.querySelector('#email').value
+      
+      
+      if ((nameRegex.test(firstName) === false) || (firstName.value == "")) {
+        document.querySelector('#firstNameErrorMsg').textContent = 'Prénom non valide'
+        console.log('Prénom non valide')
+      }else{
+        document.querySelector('#firstNameErrorMsg').textContent = ''
+        console.log('Prénom valide')
+      }
+      
+      if ((nameRegex.test(lastName) === false) || (lastName.value == "")) {
+        document.querySelector('#lastNameErrorMsg').textContent = 'Nom non valide';
+        console.log('Nom non valide')
+      }else{
+        document.querySelector('#lastNameErrorMsg').textContent = ''
+        console.log('Nom valide')
+      }
+      
+      if ((adressRegex.test(address) === false) || (address.value == "")) {
+        document.querySelector('#addressErrorMsg').textContent = 'Adresse non valide'
+        console.log('Adresse non valide')
+      }else{
+        document.querySelector('#addressErrorMsg').textContent = ''
+        console.log('Adresse valide')
+      }
+      
+      if ((nameRegex.test(city) === false) || (city.value == "")) {
+        document.querySelector('#cityErrorMsg').textContent = 'Ville non valide';
+        console.log('Ville non valide')
+      }else{
+        document.querySelector('#cityErrorMsg').textContent = ''
+        console.log('Ville valide')
+      }
+      
+      if ((emailRegex.test(email) === false) || (email.value == "")) {
+        document.querySelector('#emailErrorMsg').textContent = 'Email non valide'
+        console.log('Email non valide')
+      }else{
+        document.querySelector('#emailErrorMsg').textContent = ''
+        console.log('Email valide')
+      }
+}    
+
+
+
 
 
 

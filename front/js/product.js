@@ -75,7 +75,8 @@ Cliquez sur ok pour continuer`)){
       
       // si il y a déjà des produit dans le local storage
       if(productToLocalStorage){
-        // Vérification si un produit est déjà présent dans le local storage
+
+        // Vérification si un produit est déjà présent dans le local storage en fonction de l'id et de la couleur, on utilise .find() pour trouver le produit
         const productInCart = productToLocalStorage.find(product => product.id === id && product.color === colorChoice)
 
         // nouveau produit ajouté dans le local storage
