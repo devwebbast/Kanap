@@ -34,6 +34,13 @@ async function main(){
           
         }
 
+        // Panier vide 
+        if (products == 0){
+          document.querySelector("#cart__items").innerHTML = `<div class="cart__item__content__description">
+          <h2>Votre panier est vide</h2>
+          </div>`
+        }
+
         //modification de la quantité d'un produit du panier
         let btnChangeQuantity = document.querySelectorAll(".itemQuantity")
         for (let j = 0; j < btnChangeQuantity.length; j++){
@@ -71,7 +78,7 @@ main()
       // Validation des données du formulaire + regex
 function validateForm() {
       
-        // Variables Regex
+      // Regex
       let simpleRegex = /^[a-zA-Z\-çñàéèêëïîôüù ]{2,}$/
       let adressRegex = /^[0-9a-zA-Z\s,.'-çñàéèêëïîôüù]{3,}$/
       let emailRegex = /^[A-Za-z0-9\-\.]+@([A-Za-z0-9\-]+\.)+[A-Za-z0-9-]{2,4}$/
@@ -84,31 +91,31 @@ function validateForm() {
       
       
       if ((simpleRegex.test(firstName) === false) || (firstName.value == "")) {
-        document.querySelector('#firstNameErrorMsg').textContent = 'Prénom non valide'
+        document.querySelector('#firstNameErrorMsg').textContent = 'Veuillez saisir un prénom valide'
       }else{
         document.querySelector('#firstNameErrorMsg').textContent = ''
       }
       
       if ((simpleRegex.test(lastName) === false) || (lastName.value == "")) {
-        document.querySelector('#lastNameErrorMsg').textContent = 'Nom non valide';
+        document.querySelector('#lastNameErrorMsg').textContent = 'Veuillez saisir un nom valide';
       }else{
         document.querySelector('#lastNameErrorMsg').textContent = ''
       }
       
       if ((adressRegex.test(address) === false) || (address.value == "")) {
-        document.querySelector('#addressErrorMsg').textContent = 'Adresse non valide'
+        document.querySelector('#addressErrorMsg').textContent = 'Veuillez saisir une adresse valide'
       }else{
         document.querySelector('#addressErrorMsg').textContent = ''
       }
       
       if ((simpleRegex.test(city) === false) || (city.value == "")) {
-        document.querySelector('#cityErrorMsg').textContent = 'Ville non valide';
+        document.querySelector('#cityErrorMsg').textContent = 'Veuillez saisir une ville valid';
       }else{
         document.querySelector('#cityErrorMsg').textContent = ''
       }
       
       if ((emailRegex.test(email) === false) || (email.value == "")) {
-        document.querySelector('#emailErrorMsg').textContent = 'Email non valide'
+        document.querySelector('#emailErrorMsg').textContent = 'Veuillez saisir une adresse mail valide'
       }else{
         document.querySelector('#emailErrorMsg').textContent = ''
       }
