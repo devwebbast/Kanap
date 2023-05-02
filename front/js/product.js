@@ -79,12 +79,17 @@ Cliquez sur ok pour continuer`)){
         // Vérification si un produit est déjà présent dans le local storage en fonction de l'id et de la couleur, on utilise .find() pour trouver le produit
         const productInCart = productToLocalStorage.find(product => product.id === id && product.color === colorChoice)
 
+        
+        // ********************************** utilisation de parseInt() pour convertir les string en number ********************************** //
+        // ********************************** les 2 quantité sont strocké sous forme de string dans le localstorage ********************************** //
+        // ********************************** parseInt() permet de les convertir en number pour pouvoir les additionner et mettre à jour le panier ********************************** //
         // nouveau produit ajouté dans le local storage
         if(productInCart){
-          let newProductAdded = parseInt(productInCart.quantity) + parseInt(quantityChoice)
+          let newProductAdded = parseInt(productInCart.quantity) + parseInt(quantityChoice)  
           productInCart.quantity = newProductAdded
           localStorage.setItem("productCart", JSON.stringify(productToLocalStorage))
           productAdded()
+
 
         // produit déjà présent, on utilise .push() pour ajouter le nouveau produit dans le local storage
         }else{
@@ -93,6 +98,7 @@ Cliquez sur ok pour continuer`)){
         productAdded()
         }
 
+        
       // si il n'y a pas de produit dans le local storage  
         }else{
         productToLocalStorage = []
@@ -101,8 +107,5 @@ Cliquez sur ok pour continuer`)){
         productAdded()
         }
     })
-}
-    
-
-    
-  addToCart ()  
+}    
+addToCart ()  

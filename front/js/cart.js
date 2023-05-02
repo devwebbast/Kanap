@@ -34,13 +34,6 @@ async function main(){
           
         }
 
-        // Panier vide 
-        if (products == 0){
-          document.querySelector("#cart__items").innerHTML = `<div class="cart__item__content__description">
-          <h2>Votre panier est vide</h2>
-          </div>`
-        }
-
         //modification de la quantité d'un produit du panier
         let btnChangeQuantity = document.querySelectorAll(".itemQuantity")
         for (let j = 0; j < btnChangeQuantity.length; j++){
@@ -63,68 +56,75 @@ async function main(){
             location.reload()
           })
         }
-
-
-        //Bouton validation du formulaire
-
-        const orderButton = document.querySelector('#order')
-        orderButton.addEventListener('click', (event) => {
-          event.preventDefault();
-          validateForm();
-        })
-
       }
+
 main()
-      // Validation des données du formulaire + regex
+
+    //Bouton validation du formulaire
+    const orderButton = document.querySelector('#order')
+    orderButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      validateForm(); 
+    })
+
+
+        // Validation des données du formulaire + regex
 function validateForm() {
-      
-      // Regex
-      let simpleRegex = /^[a-zA-Z\-çñàéèêëïîôüù ]{2,}$/
-      let adressRegex = /^[0-9a-zA-Z\s,.'-çñàéèêëïîôüù]{3,}$/
-      let emailRegex = /^[A-Za-z0-9\-\.]+@([A-Za-z0-9\-]+\.)+[A-Za-z0-9-]{2,4}$/
-      
-      const firstName = document.querySelector('#firstName').value
-      const lastName = document.querySelector('#lastName').value
-      const address = document.querySelector('#address').value
-      const city = document.querySelector('#city').value
-      const email = document.querySelector('#email').value
-      
-      
-      if ((simpleRegex.test(firstName) === false) || (firstName.value == "")) {
-        document.querySelector('#firstNameErrorMsg').textContent = 'Veuillez saisir un prénom valide'
-      }else{
-        document.querySelector('#firstNameErrorMsg').textContent = ''
+      // Vérifier que le panier n'est pas vide
+      const cart = JSON.parse(localStorage.getItem('productCart'))
+      if (cart.length == 0) {
+      alert('Votre panier est vide')
+      return
       }
       
-      if ((simpleRegex.test(lastName) === false) || (lastName.value == "")) {
-        document.querySelector('#lastNameErrorMsg').textContent = 'Veuillez saisir un nom valide';
-      }else{
-        document.querySelector('#lastNameErrorMsg').textContent = ''
-      }
-      
-      if ((adressRegex.test(address) === false) || (address.value == "")) {
-        document.querySelector('#addressErrorMsg').textContent = 'Veuillez saisir une adresse valide'
-      }else{
-        document.querySelector('#addressErrorMsg').textContent = ''
-      }
-      
-      if ((simpleRegex.test(city) === false) || (city.value == "")) {
-        document.querySelector('#cityErrorMsg').textContent = 'Veuillez saisir une ville valid';
-      }else{
-        document.querySelector('#cityErrorMsg').textContent = ''
-      }
-      
-      if ((emailRegex.test(email) === false) || (email.value == "")) {
-        document.querySelector('#emailErrorMsg').textContent = 'Veuillez saisir une adresse mail valide'
-      }else{
-        document.querySelector('#emailErrorMsg').textContent = ''
-      }
-}    
+  // Regex
+  let simpleRegex = /^[a-zA-Z\-çñàéèêëïîôüù ]{2,}$/
+  let adressRegex = /^[0-9a-zA-Z\s,.'-çñàéèêëïîôüù]{3,}$/
+  let emailRegex = /^[A-Za-z0-9\-\.]+@([A-Za-z0-9\-]+\.)+[A-Za-z0-9-]{2,4}$/
+  
+  const firstName = document.querySelector('#firstName').value
+  const lastName = document.querySelector('#lastName').value
+  const address = document.querySelector('#address').value
+  const city = document.querySelector('#city').value
+  const email = document.querySelector('#email').value
+  
+  
+  if ((simpleRegex.test(firstName) === false) || (firstName.value == "")) {
+    document.querySelector('#firstNameErrorMsg').textContent = 'Veuillez saisir un prénom valide'
+  }else{
+    document.querySelector('#firstNameErrorMsg').textContent = ''
+  }
+  
+  if ((simpleRegex.test(lastName) === false) || (lastName.value == "")) {
+    document.querySelector('#lastNameErrorMsg').textContent = 'Veuillez saisir un nom valide';
+  }else{
+    document.querySelector('#lastNameErrorMsg').textContent = ''
+  }
+  
+  if ((adressRegex.test(address) === false) || (address.value == "")) {
+    document.querySelector('#addressErrorMsg').textContent = 'Veuillez saisir une adresse valide'
+  }else{
+    document.querySelector('#addressErrorMsg').textContent = ''
+  }
+  
+  if ((simpleRegex.test(city) === false) || (city.value == "")) {
+    document.querySelector('#cityErrorMsg').textContent = 'Veuillez saisir une ville valid';
+  }else{
+    document.querySelector('#cityErrorMsg').textContent = ''
+  }
+  
+  if ((emailRegex.test(email) === false) || (email.value == "")) {
+    document.querySelector('#emailErrorMsg').textContent = 'Veuillez saisir une adresse mail valide'
+  }else{
+    document.querySelector('#emailErrorMsg').textContent = ''
+  }
+}
 
+    
+    
+    
+    
+    
 
-
-
-
-
-
-
+    
+    
