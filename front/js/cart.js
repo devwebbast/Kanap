@@ -5,6 +5,7 @@ let products = JSON.parse(localStorage.getItem("productCart")) // converti les d
 async function main(){
       let cartHtmlList = ""
       let totalPrice = 0
+      if(products === null || products.length === 0) return -1
        for (let k = 0; k < products.length; k++){
         const product = products[k] 
         totalPrice = totalPrice + product.price * product.quantity
@@ -88,40 +89,74 @@ function validateForm() {
   const city = document.querySelector('#city').value
   const email = document.querySelector('#email').value
   
-  
+  let isError = false
   if ((simpleRegex.test(firstName) === false) || (firstName.value == "")) {
     document.querySelector('#firstNameErrorMsg').textContent = 'Veuillez saisir un prénom valide'
+    isError = true
   }else{
     document.querySelector('#firstNameErrorMsg').textContent = ''
   }
   
   if ((simpleRegex.test(lastName) === false) || (lastName.value == "")) {
     document.querySelector('#lastNameErrorMsg').textContent = 'Veuillez saisir un nom valide';
+    isError = true
   }else{
     document.querySelector('#lastNameErrorMsg').textContent = ''
   }
   
   if ((adressRegex.test(address) === false) || (address.value == "")) {
     document.querySelector('#addressErrorMsg').textContent = 'Veuillez saisir une adresse valide'
+    isError = true
   }else{
     document.querySelector('#addressErrorMsg').textContent = ''
   }
   
   if ((simpleRegex.test(city) === false) || (city.value == "")) {
-    document.querySelector('#cityErrorMsg').textContent = 'Veuillez saisir une ville valid';
+    document.querySelector('#cityErrorMsg').textContent = 'Veuillez saisir une ville valide';
+    isError = true
   }else{
     document.querySelector('#cityErrorMsg').textContent = ''
   }
   
   if ((emailRegex.test(email) === false) || (email.value == "")) {
     document.querySelector('#emailErrorMsg').textContent = 'Veuillez saisir une adresse mail valide'
+    isError = true
   }else{
     document.querySelector('#emailErrorMsg').textContent = ''
   }
-}
 
-    
-    
+  if(isError) {
+    return -1
+  }
+  
+  // Création de l'objet contact
+  const contact = {
+    firstName: firstName,
+    lastName: lastName,
+    address: address,
+    city: city,
+    email: email
+  }
+  const body = {contact: contact, products: cart}
+  console.log(body)
+  fetch('http://localhost:3000/api/products/order', {
+  method: 'POST',
+  body: JSON.stringify({
+    contact: contact,
+    products: products.map(product => product.id),
+  }),
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log(data)
+    localStorage.removeItem('productCart')
+    document.location.href = `confirmation.html?orderId=${data.orderId}`
+  })
+  .catch(error => console.error(error));
+}    
     
     
     
